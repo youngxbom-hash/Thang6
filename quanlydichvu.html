@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotelPro - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .stat-card { transition: all 0.3s; }
+        .stat-card:hover { transform: translateY(-6px); }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <div class="w-72 sidebar text-slate-200 flex flex-col">
+        <div class="p-6 border-b border-slate-700">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11  flex items-center justify-center text-3xl shadow"><img src="logoks.jpg" alt="Khách sạn"></div>
+                <div>
+                    <h1 class="text-3xl text-center text-black">Khách Sạn Phương Đông</h1>
+                    <p class="text-xs text-center text-black -mt-1">Hotel Management System</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 p-4 space-y-1">
+    <a href="dashboard.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100 active">
+        <i class="fa-solid fa-house w-5"></i>
+        <span>Dashboard</span>
+    </a>
+    
+    <a href="Tracuu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-magnifying-glass w-5"></i>
+        <span>Tra cứu & Đặt Phòng</span>
+    </a>
+    
+    <a href="quanlydichvu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-bed w-5"></i>
+        <span>Quản lý dịch vụ</span>
+    </a>
+    
+    <a href="room-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-door-open w-5"></i>
+        <span>Quản lý Phòng</span>
+    </a>
+    
+    <a href="create-booking.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-plus w-5"></i>
+        <span>Tạo Đặt Phòng</span>
+    </a>
+    
+    <a href="check-in-out.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-key w-5"></i>
+        <span>Check-in / Check-out</span>
+    </a>
+    
+    <a href="guest-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-users w-5"></i>
+        <span>Khách Lưu Trú</span>
+    </a>
+    
+    <a href="front-desk.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-map w-5"></i>
+        <span>Bảng điều khiển Front Desk</span>
+    </a>
+    
+    <a href="reports.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-chart-column w-5"></i>
+        <span>Báo cáo & Thống kê</span>
+    </a>
+</nav>
+        <div class="p-4 border-t border-slate-700">
+            <div class="flex items-center gap-3 p-3 bg-slate-800 rounded-2xl">
+                <div class="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">NV</div>
+                <div class="flex-1">
+                    <p class="font-medium">Nguyễn Văn A</p>
+                    <p class="text-xs text-slate-400">Lễ tân trưởng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex-1 overflow-auto">
+            <header class="bg-white border-b px-8 py-5 flex items-center justify-between sticky top-0 z-10">
+                <h2 class="text-3xl font-semibold text-gray-800">Quản lý dịch vụ</h2>
+                <div class="flex items-center gap-4">
+                </div>
+            </header>
+
+            <div class="p-8">
+<!-- Main Content -->
+    <main class="flex-1 max-w-screen-2xl mx-auto w-full px-6 md:px-10 py-8">
+        
+        <!-- Khung Quản lý Dịch vụ & Định giá Tiện nghi -->
+        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+            
+            <!-- Tiêu đề box + Nút thêm mới -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-gray-100">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">Quản lý các tiện ích đồ ăn, thức uống minibar và chăn ga gối đệm theo từng phòng</h3>
+                </div>
+                <button onclick="openAddModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl font-semibold text-xs flex items-center gap-2 transition shadow-md">
+                    <i class="fa-solid fa-plus"></i> Thêm mới mục
+                </button>
+            </div>
+
+            <!-- Các nút Bộ lọc (Tabs) -->
+            <div class="flex flex-wrap items-center gap-3 mb-8">
+                <button onclick="filterTable('all')" id="btn-all" class="filter-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-blue-600 text-white transition shadow-sm">
+                    Tất cả
+                </button>
+                <button onclick="filterTable('phatsinh')" id="btn-phatsinh" class="filter-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-600 transition">
+                    Đồ ăn & Nước uống
+                </button>
+                <button onclick="filterTable('denbu')" id="btn-denbu" class="filter-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-600 transition">
+                    Chăn ga gối đệm
+                </button>
+            </div>
+
+            <!-- Bảng dữ liệu -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider border-b border-gray-100">
+                            <th class="pb-4 pl-2">Mã ID</th>
+                            <th class="pb-4">Số phòng</th>
+                            <th class="pb-4">Tên mục tiện ích</th>
+                            <th class="pb-4">Phân loại</th>
+                            <th class="pb-4">Danh mục / Nhóm</th>
+                            <th class="pb-4">Số lượng</th>
+                            <th class="pb-4">Đơn giá (VNĐ)</th>
+                            <th class="pb-4 text-center pr-2">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="service-table-body" class="text-sm divide-y divide-gray-50">
+                        <!-- Dữ liệu được render tự động qua JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal Thêm/Sửa Dịch vụ -->
+    <div id="serviceModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl">
+            <h3 id="modalTitle" class="text-lg font-bold text-gray-900 mb-4">Thêm mới mục tiện ích</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Số phòng (Ví dụ: 101, 202...)</label>
+                    <input type="text" id="inputRoom" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600" placeholder="Nhập số phòng...">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Tên mục (Đồ ăn, Nước uống, Chăn ga...)</label>
+                    <input type="text" id="inputName" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600" placeholder="Nhập tên mục...">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Phân loại</label>
+                    <select id="inputCategory" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600 bg-white">
+                        <option value="phatsinh">Đồ ăn & Nước uống</option>
+                        <option value="denbu">Chăn ga gối đệm</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Nhóm chi tiết (Ví dụ: Nước suối, Đồ ăn nhẹ, Ga giường...)</label>
+                    <input type="text" id="inputGroup" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600" placeholder="Nhập nhóm chi tiết...">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Số lượng</label>
+                    <input type="number" id="inputQuantity" min="1" value="1" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Đơn giá (VNĐ) <span class="text-gray-400 font-normal">(Cố định theo hệ thống)</span></label>
+                    <input type="number" id="inputPrice" value="50000" readonly class="w-full px-4 py-2.5 border border-gray-200 bg-gray-100 text-gray-500 rounded-xl text-sm focus:outline-none cursor-not-allowed">
+                </div>
+            </div>
+            <div class="flex gap-3 mt-6">
+                <button onclick="closeModal()" class="flex-1 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl font-medium text-xs transition">Hủy</button>
+                <button onclick="saveService()" class="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-xs transition">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle menu người dùng
+        function toggleUserMenu() {
+            const menu = document.getElementById('user-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function logout() {
+            alert('Đã đăng xuất thành công!');
+            window.location.href = 'dangnhapkh.html';
+        }
+
+        // Dữ liệu mẫu bao gồm Số phòng (room)
+        let services = [
+            { id: "#1", room: "101", name: "Nước suối Minibar", type: "phatsinh", group: "Nước uống", quantity: 2, price: 25000 },
+            { id: "#2", room: "101", name: "Trà ngọt & Cà phê hòa tan", type: "phatsinh", group: "Đồ uống", quantity: 4, price: 15000 },
+            { id: "#3", room: "102", name: "Set bánh quy snack nhẹ", type: "phatsinh", group: "Đồ ăn", quantity: 1, price: 35000 },
+            { id: "#4", room: "201", name: "Mì tôm ly ăn liền", type: "phatsinh", group: "Đồ ăn", quantity: 2, price: 20000 },
+            { id: "#5", room: "202", name: "Vỏ gối nằm cao cấp", type: "denbu", group: "Chăn ga gối đệm", quantity: 2, price: 90000 },
+            { id: "#6", room: "301", name: "Ga trải giường đôi", type: "denbu", group: "Chăn ga gối đệm", quantity: 1, price: 250000 },
+            { id: "#7", room: "302", name: "Ruột chăn bông đắp", type: "denbu", group: "Chăn ga gối đệm", quantity: 1, price: 450000 }
+        ];
+
+        let currentFilter = 'all';
+        let editIndex = null;
+
+        function renderTable(filter = 'all') {
+            currentFilter = filter;
+            const tbody = document.getElementById('service-table-body');
+            tbody.innerHTML = '';
+
+            // Đổi trạng thái active nút bấm bộ lọc
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "filter-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-600 transition";
+            });
+            if(filter === 'all') document.getElementById('btn-all').className = "filter-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-blue-600 text-white transition shadow-sm";
+            if(filter === 'phatsinh') document.getElementById('btn-phatsinh').className = "filter-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-blue-600 text-white transition shadow-sm";
+            if(filter === 'denbu') document.getElementById('btn-denbu').className = "filter-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-blue-600 text-white transition shadow-sm";
+
+            let filteredData = services.filter(item => {
+                if(filter === 'all') return true;
+                return item.type === filter;
+            });
+
+            filteredData.forEach((item) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50/80 transition";
+                
+                let badgeClass = item.type === 'phatsinh' 
+                    ? 'bg-blue-50 text-blue-600 font-medium px-3 py-1 rounded-full text-[11px]' 
+                    : 'bg-amber-50 text-amber-600 font-medium px-3 py-1 rounded-full text-[11px]';
+                let badgeText = item.type === 'phatsinh' ? 'Đồ ăn & Nước uống' : 'Chăn ga gối đệm';
+
+                let formattedPrice = item.price.toLocaleString('vi-VN') + ' đ';
+
+                tr.innerHTML = `
+                    <td class="py-4 pl-2 font-mono text-xs font-bold text-gray-500">${item.id}</td>
+                    <td class="py-4 font-semibold text-blue-600">Phòng ${item.room}</td>
+                    <td class="py-4 font-semibold text-gray-800">${item.name}</td>
+                    <td class="py-4"><span class="${badgeClass}">${badgeText}</span></td>
+                    <td class="py-4 text-gray-600 text-xs">${item.group}</td>
+                    <td class="py-4 text-gray-700 font-medium">${item.quantity}</td>
+                    <td class="py-4 font-bold text-gray-900">${formattedPrice}</td>
+                    <td class="py-4 text-center pr-2">
+                        <button onclick="editService(${services.indexOf(item)})" class="text-blue-600 hover:text-blue-800 p-2 transition"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteService(${services.indexOf(item)})" class="text-red-500 hover:text-red-700 p-2 transition ml-2"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterTable(type) {
+            renderTable(type);
+        }
+
+        function openAddModal() {
+            editIndex = null;
+            document.getElementById('modalTitle').textContent = "Thêm mới mục tiện ích";
+            document.getElementById('inputRoom').value = "";
+            document.getElementById('inputName').value = "";
+            document.getElementById('inputGroup').value = "";
+            document.getElementById('inputQuantity').value = "1";
+            document.getElementById('inputPrice').value = "30000"; // Giá cố định mặc định khi thêm mới
+            document.getElementById('serviceModal').classList.remove('hidden');
+            document.getElementById('serviceModal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('serviceModal').classList.add('hidden');
+            document.getElementById('serviceModal').classList.remove('flex');
+        }
+
+        function editService(index) {
+            editIndex = index;
+            const item = services[index];
+            document.getElementById('modalTitle').textContent = "Chỉnh sửa mục tiện ích";
+            document.getElementById('inputRoom').value = item.room;
+            document.getElementById('inputName').value = item.name;
+            document.getElementById('inputCategory').value = item.type;
+            document.getElementById('inputGroup').value = item.group;
+            document.getElementById('inputQuantity').value = item.quantity;
+            document.getElementById('inputPrice').value = item.price; // Giữ nguyên đơn giá hiển thị nhưng không sửa được
+            document.getElementById('serviceModal').classList.remove('hidden');
+            document.getElementById('serviceModal').classList.add('flex');
+        }
+
+        function saveService() {
+            const room = document.getElementById('inputRoom').value.trim();
+            const name = document.getElementById('inputName').value.trim();
+            const type = document.getElementById('inputCategory').value;
+            const group = document.getElementById('inputGroup').value.trim();
+            const quantity = parseInt(document.getElementById('inputQuantity').value);
+
+            if(!room || !name || !group || isNaN(quantity) || quantity <= 0) {
+                alert("Vui lòng điền đầy đủ số phòng, tên, nhóm và số lượng hợp lệ!");
+                return;
+            }
+
+            if(editIndex !== null) {
+                services[editIndex].room = room;
+                services[editIndex].name = name;
+                services[editIndex].type = type;
+                services[editIndex].group = group;
+                services[editIndex].quantity = quantity;
+                // Đơn giá được giữ nguyên cố định không thay đổi
+            } else {
+                const price = parseInt(document.getElementById('inputPrice').value) || 30000;
+                const newId = '#' + (services.length + 1);
+                services.push({ id: newId, room, name, type, group, quantity, price });
+            }
+
+            closeModal();
+            renderTable(currentFilter);
+        }
+
+        function deleteService(index) {
+            if(confirm("Bạn có chắc chắn muốn xóa mục này không?")) {
+                services.splice(index, 1);
+                renderTable(currentFilter);
+            }
+        }
+
+        // Chạy khởi tạo lần đầu khi mở trang
+        window.onload = () => {
+            renderTable('all');
+        };
+    </script>

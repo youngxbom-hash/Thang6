@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotelPro - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .stat-card { transition: all 0.3s; }
+        .stat-card:hover { transform: translateY(-6px); }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <div class="w-72 sidebar text-slate-200 flex flex-col">
+        <div class="p-6 border-b border-slate-700">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11  flex items-center justify-center text-3xl shadow"><img src="logoks.jpg" alt="Khách sạn"></div>
+                <div>
+                    <h1 class="text-3xl text-center text-black">Khách Sạn Phương Đông</h1>
+                    <p class="text-xs text-center text-black -mt-1">Hotel Management System</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 p-4 space-y-1">
+    <a href="dashboard.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100 active">
+        <i class="fa-solid fa-house w-5"></i>
+        <span>Dashboard</span>
+    </a>
+    
+    <a href="Tracuu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-magnifying-glass w-5"></i>
+        <span>Tra cứu & Đặt Phòng</span>
+    </a>
+    
+    <a href="quanlydichvu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-bed w-5"></i>
+        <span>Quản lý dịch vụ</span>
+    </a>
+    
+    <a href="room-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-door-open w-5"></i>
+        <span>Quản lý Phòng</span>
+    </a>
+    
+    <a href="create-booking.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-plus w-5"></i>
+        <span>Tạo Đặt Phòng</span>
+    </a>
+    
+    <a href="check-in-out.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-key w-5"></i>
+        <span>Check-in / Check-out</span>
+    </a>
+    
+    <a href="guest-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-users w-5"></i>
+        <span>Khách Lưu Trú</span>
+    </a>
+    
+    <a href="front-desk.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-map w-5"></i>
+        <span>Bảng điều khiển Front Desk</span>
+    </a>
+    
+    <a href="reports.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-chart-column w-5"></i>
+        <span>Báo cáo & Thống kê</span>
+    </a>
+</nav>
+        <div class="p-4 border-t border-slate-700">
+            <div class="flex items-center gap-3 p-3 bg-slate-800 rounded-2xl">
+                <div class="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">NV</div>
+                <div class="flex-1">
+                    <p class="font-medium">Nguyễn Văn A</p>
+                    <p class="text-xs text-slate-400">Lễ tân trưởng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <header class="bg-white border-b px-8 py-5 flex items-center justify-between sticky top-0 z-10">
+                <h2 class="text-3xl font-semibold text-gray-800">Trang chủ</h2>
+                <div class="flex items-center gap-4">
+                </div>
+            </header>
+
+            <div class="p-8">
+                <!-- Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="stat-card bg-white p-6 rounded-3xl shadow-sm border">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Phòng trống</p>
+                                <p class="text-5xl font-bold text-emerald-600 mt-2">42</p>
+                            </div>
+                            <i class="fa-solid fa-bed text-5xl text-emerald-100"></i>
+                        </div>
+                        <p class="text-emerald-500 text-sm mt-4">↑ 8 phòng so với hôm qua</p>
+                    </div>
+
+                    <div class="stat-card bg-white p-6 rounded-3xl shadow-sm border">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Đặt phòng hôm nay</p>
+                                <p class="text-5xl font-bold text-amber-600 mt-2">12</p>
+                            </div>
+                            <i class="fa-solid fa-calendar-check text-5xl text-amber-100"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card bg-white p-6 rounded-3xl shadow-sm border">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Doanh thu ngày</p>
+                                <p class="text-5xl font-bold text-blue-600 mt-2">68.4tr</p>
+                            </div>
+                            <i class="fa-solid fa-dollar-sign text-5xl text-blue-100"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card bg-white p-6 rounded-3xl shadow-sm border">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Occupancy Rate</p>
+                                <p class="text-5xl font-bold text-purple-600 mt-2">67%</p>
+                            </div>
+                            <i class="fa-solid fa-chart-pie text-5xl text-purple-100"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+                    <!-- Revenue Chart -->
+                    <div class="lg:col-span-2 bg-white rounded-3xl p-8 shadow-sm">
+                        <div class="flex justify-between mb-6">
+                            <h3 class="font-semibold text-xl">Doanh thu tuần này</h3>
+                            <select class="border rounded-xl px-4 py-2 text-sm">
+                                <option>7 ngày qua</option>
+                                <option>Tháng này</option>
+                            </select>
+                        </div>
+                        <canvas id="revenueChart" height="120"></canvas>
+                    </div>
+
+                    <!-- Quick Status -->
+                    <div class="bg-white rounded-3xl p-8 shadow-sm">
+                        <h3 class="font-semibold text-xl mb-6">Trạng thái phòng</h3>
+                        <div class="space-y-5">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-4 h-4 bg-emerald-500 rounded-full"></div>
+                                    <span class="font-medium">Sẵn sàng</span>
+                                </div>
+                                <span class="font-bold text-xl">42</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
+                                    <span class="font-medium">Đang sử dụng</span>
+                                </div>
+                                <span class="font-bold text-xl">38</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-4 h-4 bg-amber-500 rounded-full"></div>
+                                    <span class="font-medium">Đang dọn dẹp</span>
+                                </div>
+                                <span class="font-bold text-xl">15</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                                    <span class="font-medium">Bảo trì</span>
+                                </div>
+                                <span class="font-bold text-xl">5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming -->
+                <div class="mt-8 bg-white rounded-3xl p-8 shadow-sm">
+                    <h3 class="font-semibold text-xl mb-6">Hoạt động sắp tới</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border-l-4 border-blue-500 pl-6">
+                            <p class="text-sm text-gray-500">Check-in hôm nay</p>
+                            <p class="font-medium">14 khách (3 VIP)</p>
+                        </div>
+                        <div class="border-l-4 border-amber-500 pl-6">
+                            <p class="text-sm text-gray-500">Check-out hôm nay</p>
+                            <p class="font-medium">9 khách</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Revenue Chart
+        const ctx = document.getElementById('revenueChart');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
+                datasets: [{
+                    label: 'Doanh thu (triệu)',
+                    data: [45, 52, 48, 61, 55, 67, 72],
+                    backgroundColor: '#3b82f6',
+                    borderRadius: 8,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f3f4f6' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotelPro - Chi tiết phòng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .photo-gallery img {
+            transition: all 0.3s;
+        }
+        .photo-gallery img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <div class="w-72 sidebar text-slate-200 flex flex-col">
+        <div class="p-6 border-b border-slate-700">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11  flex items-center justify-center text-3xl shadow"><img src="logoks.jpg" alt="Khách sạn"></div>
+                <div>
+                    <h1 class="text-3xl text-center text-black">Khách Sạn Phương Đông</h1>
+                    <p class="text-xs text-center text-black -mt-1">Hotel Management System</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 p-4 space-y-1">
+            <a href="dashboard.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-gauge-high w-5"></i>
+                <span>Trang chủ</span>
+            </a>
+            <a href="search-book.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-magnifying-glass w-5"></i>
+                <span>Tra cứu & Đặt phòng</span>
+            </a>
+            <a href="service-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-concierge-bell w-5"></i><span>Quản lý Dịch vụ & Tiện nghi</span>
+            </a>
+            <a href="room-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-door-open w-5"></i>
+                <span>Quản lý Phòng</span>
+            </a>
+            <a href="create-booking.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-plus w-5"></i>
+                <span>Tạo Đặt Phòng</span>
+            </a>
+            <a href="check-in-out.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-key w-5"></i>
+                <span>Check-in / Check-out</span>
+            </a>
+            <a href="guest-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-users w-5"></i>
+                <span>Khách Lưu Trú</span>
+            </a>
+            <a href="front-desk.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-map w-5"></i>
+                <span>Bảng điều khiển </span>
+            </a>
+            <a href="reports.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-chart-column w-5"></i>
+                <span>Báo cáo & thống kê</span>
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-slate-700">
+            <div class="flex items-center gap-3 p-3 bg-slate-800 rounded-2xl">
+                <div class="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">NV</div>
+                <div class="flex-1">
+                    <p class="font-medium">Nguyễn Văn A</p>
+                    <p class="text-xs text-slate-400">Lễ tân trưởng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <header class="bg-white border-b px-8 py-5 flex items-center justify-between sticky top-0 z-10">
+                <h2 class="text-3xl font-semibold text-gray-800">Chi tiết phòng</h2>
+                <div class="flex items-center gap-4">
+                </div>
+            </header>
+
+            <div class="p-8">
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <header class="bg-white border-b px-8 py-6 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <button onclick="goBack()" class="text-gray-500 hover:text-gray-700">
+                    </button>
+                    <h1 class="text-3xl font-semibold">Phòng 305 - Deluxe Ocean View</h1>
+                </div>
+                <span class="px-6 py-2 bg-emerald-100 text-emerald-700 font-medium rounded-2xl">Sẵn sàng</span>
+            </header>
+
+            <div class="p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <!-- Gallery -->
+                    <div>
+                        <div class="photo-gallery rounded-3xl overflow-hidden border mb-4">
+                            <img id="main-image" src="phong3.jpg" class="w-full h-[420px] object-cover">
+                        </div>
+                        <div class="grid grid-cols-4 gap-3">
+                            <img onclick="changeImage(this)" src="vewbien.jpg" class="rounded-2xl cursor-pointer border-2 border-blue-500">
+                            <img onclick="changeImage(this)" src="vib.webp" class="rounded-2xl cursor-pointer hover:border-blue-300">
+                            <img onclick="changeImage(this)" src="sảnh.jpg" class="rounded-2xl cursor-pointer hover:border-blue-300">
+                            <img onclick="changeImage(this)" src="phòng 1.jpg" class="rounded-2xl cursor-pointer hover:border-blue-300">
+                        </div>
+                    </div>
+
+                    <!-- Info -->
+                    <div>
+                        <div class="bg-white rounded-3xl p-8 shadow-sm">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h2 class="text-3xl font-bold">Deluxe Ocean View</h2>
+                                    <p class="text-gray-500">Phòng 305 • 45m² • Tầng 3</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-4xl font-bold text-blue-600">2.850.000đ</p>
+                                    <p class="text-sm text-gray-400">/ đêm</p>
+                                </div>
+                            </div>
+
+                            <!-- Amenities -->
+                            <div class="mt-8">
+                                <h3 class="font-semibold mb-4">Tiện nghi nổi bật</h3>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="flex items-center gap-3"><i class="fa-solid fa-wifi text-blue-500"></i><span>WiFi tốc độ cao</span></div>
+                                    <div class="flex items-center gap-3"><i class="fa-solid fa-swimmer text-blue-500"></i><span>Bể bơi vô cực</span></div>
+                                    <div class="flex items-center gap-3"><i class="fa-solid fa-mug-hot text-blue-500"></i><span>Mini bar</span></div>
+                                    <div class="flex items-center gap-3"><i class="fa-solid fa-tv text-blue-500"></i><span>Smart TV 55"</span></div>
+                                    <div class="flex items-center gap-3"><i class="fa-solid fa-wind text-blue-500"></i><span>Điều hòa</span></div>
+                                    <div class="flex items-center gap-3"><i class="fa-solid fa-bath text-blue-500"></i><span>Bồn tắm</span></div>
+                                </div>
+                            </div>
+
+                            <!-- Price Table -->
+                            <div class="mt-10">
+                                <h3 class="font-semibold mb-3">Bảng giá</h3>
+                                <table class="w-full text-sm">
+                                    <tr class="border-b">
+                                        <td class="py-3">Ngày thường</td>
+                                        <td class="py-3 text-right font-medium">2.450.000đ</td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="py-3">Cuối tuần / Lễ</td>
+                                        <td class="py-3 text-right font-medium">3.200.000đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3">Giá tháng (áp dụng từ 7 ngày)</td>
+                                        <td class="py-3 text-right font-medium">1.950.000đ/ngày</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- Cancellation Policy -->
+                            <div class="mt-8 bg-amber-50 border border-amber-200 rounded-2xl p-5 text-sm">
+                                <p class="font-medium flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> Chính sách hủy phòng</p>
+                                <p class="mt-2 text-gray-600">Hủy trước 48 giờ: Hoàn tiền 100%<br>
+                                Hủy trong 48 giờ: Phí 50%</p>
+                            </div>
+
+                            <!-- Quick Booking -->
+                            <div class="mt-10">
+                                <h3 class="font-semibold mb-4">Đặt phòng nhanh</h3>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="date" value="2026-07-15" class="border rounded-2xl px-5 py-4">
+                                    <input type="date" value="2026-07-20" class="border rounded-2xl px-5 py-4">
+                                </div>
+                                <button onclick="quickBook()" 
+                                        class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl text-lg font-semibold">
+                                    Xác nhận đặt phòng - 2.850.000đ/ngày
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeImage(el) {
+            document.getElementById('main-image').src = el.src;
+        }
+
+        function quickBook() {
+            if (confirm("Xác nhận đặt phòng 305 - Deluxe Ocean View từ 15/07 đến 20/07?")) {
+                alert("🎉 Đặt phòng thành công!\nMã đặt phòng: BK-784392");
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

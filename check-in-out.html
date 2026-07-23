@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotelPro - Check-in / Check-out</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <div class="w-72 sidebar text-slate-200 flex flex-col">
+        <div class="p-6 border-b border-slate-700">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11  flex items-center justify-center text-3xl shadow"><img src="logoks.jpg" alt="Khách sạn"></div>
+                <div>
+                    <h1 class="text-3xl text-center text-black">Khách Sạn Phương Đông</h1>
+                    <p class="text-xs text-center text-black -mt-1">Hotel Management System</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 p-4 space-y-1">
+    <a href="dashboard.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100 active">
+        <i class="fa-solid fa-house w-5"></i>
+        <span>Dashboard</span>
+    </a>
+    
+    <a href="Tracuu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-magnifying-glass w-5"></i>
+        <span>Tra cứu & Đặt Phòng</span>
+    </a>
+    
+    <a href="quanlydichvu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-bed w-5"></i>
+        <span>Quản lý dịch vụ</span>
+    </a>
+    
+    <a href="room-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-door-open w-5"></i>
+        <span>Quản lý Phòng</span>
+    </a>
+    
+    <a href="create-booking.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-plus w-5"></i>
+        <span>Tạo Đặt Phòng</span>
+    </a>
+    
+    <a href="check-in-out.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-key w-5"></i>
+        <span>Check-in / Check-out</span>
+    </a>
+    
+    <a href="guest-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-users w-5"></i>
+        <span>Khách Lưu Trú</span>
+    </a>
+    
+    <a href="front-desk.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-map w-5"></i>
+        <span>Bảng điều khiển Front Desk</span>
+    </a>
+    
+    <a href="reports.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-chart-column w-5"></i>
+        <span>Báo cáo & Thống kê</span>
+    </a>
+</nav>
+
+        <div class="p-4 border-t border-slate-700">
+            <div class="flex items-center gap-3 p-3 bg-slate-800 rounded-2xl">
+                <div class="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">NV</div>
+                <div class="flex-1">
+                    <p class="font-medium">Nguyễn Văn A</p>
+                    <p class="text-xs text-slate-400">Lễ tân trưởng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!-- Main Content -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+        <header class="bg-white border-b px-8 py-5 flex items-center justify-between sticky top-0 z-10">
+            <h2 class="text-2xl font-bold text-gray-800">Check-in / Check-out</h2>
+        </header>
+
+        <div class="p-8 flex-1 overflow-auto">
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Left: Search / Scan -->
+                    <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 h-fit space-y-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Tìm kiếm / Quét mã</h3>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-gray-600">Quét QR trên phiếu đặt phòng</label>
+                            <div onclick="simulateScan()" 
+                                 class="border-2 border-dashed border-gray-300 hover:border-blue-400 rounded-3xl h-44 flex flex-col items-center justify-center cursor-pointer transition">
+                                <i class="fa-solid fa-qrcode text-5xl text-gray-300 mb-3"></i>
+                                <p class="font-medium text-gray-500 text-sm">Click để quét QR</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-gray-600">Tìm theo SĐT hoặc mã phòng</label>
+                            <div class="flex gap-3">
+                                <input type="text" id="phoneSearch" placeholder="Ví dụ: 0912345678 hoặc 305" 
+                                       class="flex-1 border border-gray-300 rounded-2xl px-5 py-3 outline-none focus:border-blue-500">
+                                <button onclick="searchBooking()" 
+                                        class="px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-semibold transition">
+                                    Tìm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Booking Info (Chưa có tính tiền khi mới check-in) -->
+                    <div id="booking-info" class="hidden bg-white rounded-3xl p-8 shadow-sm border border-gray-100 space-y-6">
+                        <div class="flex justify-between items-start border-b pb-4">
+                            <div>
+                                <h3 id="guest-name" class="text-xl font-bold text-gray-900"></h3>
+                                <p id="room-number" class="text-sm font-medium text-blue-600 mt-1"></p>
+                            </div>
+                            <span id="status-badge" class="px-4 py-1.5 bg-emerald-50 text-emerald-700 rounded-xl text-xs font-semibold">Đang hoạt động</span>
+                        </div>
+
+                        <!-- Thông tin nhận phòng cơ bản -->
+                        <div class="bg-blue-50 p-5 rounded-2xl border border-blue-100 space-y-3">
+                            <h4 class="font-bold text-blue-900 text-sm flex items-center gap-2"><i class="fa-solid fa-user-check"></i> Thông tin thời gian</h4>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <p class="text-gray-500 text-xs">Ngày nhận</p>
+                                    <p id="checkin-date" class="font-medium text-gray-800"></p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-xs">Ngày trả dự kiến</p>
+                                    <p id="checkout-date" class="font-medium text-gray-800"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions: Nút bấm Check-in (Mới quét/tìm xong chỉ hiện check-in) -->
+                        <div class="pt-4 flex gap-3">
+                            <button onclick="performCheckIn()" id="checkin-btn"
+                                    class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3.5 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 transition">
+                                <i class="fa-solid fa-key"></i> Xác nhận Check-in Nhận phòng
+                            </button>
+                            <button onclick="openCheckoutModal()" id="init-checkout-btn"
+                                    class="flex-1 bg-orange-600 hover:bg-orange-700 text-white py-3.5 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 transition">
+                                <i class="fa-solid fa-clipboard-check"></i> Tiến hành Check-out
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="empty-state" class="bg-white rounded-3xl p-16 text-center flex flex-col items-center justify-center border border-gray-100 shadow-sm">
+                        <i class="fa-solid fa-magnifying-glass text-6xl text-gray-300 mb-6"></i>
+                        <p class="text-gray-500 text-lg">Nhập SĐT, mã phòng hoặc quét QR để bắt đầu</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL THANH TOÁN / CHECK-OUT (Chỉ hiện khi ấn Check-out) -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-8 space-y-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b pb-4">
+                <h3 class="text-xl font-bold text-gray-900">Hóa đơn & Check-out Phòng <span id="modal-room-num"></span></h3>
+                <button onclick="closeCheckoutModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <!-- PHẦN THÊM DỊCH VỤ / ĐỀN BÙ KHI CHECK-OUT -->
+            <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-3">
+                <h4 class="font-bold text-gray-800 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-cart-plus text-blue-600"></i> Thêm dịch vụ / Đền bù phát sinh
+                </h4>
+                <div class="flex gap-2">
+                    <select id="select-service-item" class="flex-1 border rounded-xl px-3 py-2 text-sm bg-white outline-none focus:border-blue-500">
+                        <!-- Nạp dữ liệu động từ script -->
+                    </select>
+                    <button onclick="addServiceToRoom()" class="bg-slate-800 hover:bg-slate-900 text-white px-4 py-2 rounded-xl text-sm font-medium transition">
+                        Thêm
+                    </button>
+                </div>
+
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 mb-2 uppercase">Danh sách dịch vụ đã chọn:</p>
+                    <ul id="room-service-list" class="space-y-2 text-sm max-h-28 overflow-y-auto">
+                        <!-- Danh sách dịch vụ phát sinh -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CHI TIẾT THANH TOÁN -->
+            <div class="space-y-2.5 text-sm text-gray-600">
+                <div class="flex justify-between">
+                    <span>Tiền phòng gốc</span>
+                    <span id="room-price" class="font-medium text-gray-800">0đ</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Tổng dịch vụ phát sinh</span>
+                    <span id="total-service-fee" class="font-medium text-blue-600">0đ</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span>Mã giảm giá (%)</span>
+                    <div class="flex gap-2">
+                        <input type="number" id="discount-percent" placeholder="0" value="0" oninput="updateBillCalculation()" class="border rounded-xl px-3 py-1 w-20 text-right outline-none text-sm">
+                    </div>
+                </div>
+                <div class="flex justify-between">
+                    <span>VAT (10%)</span>
+                    <span id="vat-price">0đ</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Đã thanh toán (Đặt cọc)</span>
+                    <span id="deposit" class="text-gray-500">0đ</span>
+                </div>
+                <hr class="border-gray-200">
+                <div class="flex justify-between text-lg font-bold text-gray-900">
+                    <span>Khách cần thanh toán</span>
+                    <span id="final-total" class="text-blue-600">0đ</span>
+                </div>
+            </div>
+            
+            <!-- Actions trong Modal -->
+            <div class="flex gap-3 pt-2">
+                <button onclick="printInvoice()" class="flex-1 border border-gray-300 py-3 rounded-2xl hover:bg-gray-50 font-medium text-sm transition">
+                    🖨️ In hóa đơn
+                </button>
+                <button onclick="performCheckOut()" class="flex-1 bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-2xl font-semibold text-sm transition">
+                    Xác nhận thanh toán
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sampleBooking = {
+            name: "Trần Thị Bích",
+            phone: "0912345678",
+            room: "305",
+            type: "Deluxe Ocean View",
+            checkin: "15/07/2026",
+            checkout: "20/07/2026",
+            basePrice: 14250000,
+            depositAmount: 5000000
+        };
+
+        const systemServices = [
+            { id: 1, name: "Nước suối Minibar", price: 25000 },
+            { id: 2, name: "Giặt ủi áo sơ mi", price: 40000 },
+            { id: 3, name: "Set ăn sáng buffet", price: 150000 },
+            { id: 4, name: "Khăn tắm bị ố/rách (Đền bù)", price: 120000 },
+            { id: 5, name: "Ly thủy tinh vỡ (Đền bù)", price: 50000 }
+        ];
+        
+
+        let currentRoomServices = [];
+
+        function simulateScan() {
+            alert("📱 Đã quét QR thành công!");
+            showBookingInfo();
+        }
+
+        function searchBooking() {
+            const keyword = document.getElementById('phoneSearch').value.trim();
+            if (keyword.length > 0) {
+                showBookingInfo();
+            } else {
+                alert("Vui lòng nhập số điện thoại hoặc mã phòng hợp lệ!");
+            }
+        }
+
+        function showBookingInfo() {
+            document.getElementById('empty-state').classList.add('hidden');
+            const info = document.getElementById('booking-info');
+            info.classList.remove('hidden');
+
+            document.getElementById('guest-name').textContent = sampleBooking.name;
+            document.getElementById('room-number').textContent = `Phòng ${sampleBooking.room} - ${sampleBooking.type}`;
+            document.getElementById('checkin-date').textContent = sampleBooking.checkin;
+            document.getElementById('checkout-date').textContent = sampleBooking.checkout;
+        }
+
+        function openCheckoutModal() {
+            document.getElementById('modal-room-num').textContent = sampleBooking.room;
+            document.getElementById('room-price').textContent = sampleBooking.basePrice.toLocaleString('vi-VN') + "đ";
+            document.getElementById('deposit').textContent = "-" + sampleBooking.depositAmount.toLocaleString('vi-VN') + "đ";
+
+            loadServiceSelectOptions();
+            updateBillCalculation();
+            
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function loadServiceSelectOptions() {
+            const select = document.getElementById('select-service-item');
+            select.innerHTML = '';
+            systemServices.forEach(s => {
+                select.innerHTML += `<option value="${s.id}">${s.name} - ${s.price.toLocaleString('vi-VN')}đ</option>`;
+            });
+        }
+
+        function addServiceToRoom() {
+            const selectId = document.getElementById('select-service-item').value;
+            const selectedItem = systemServices.find(s => s.id == selectId);
+            
+            if (selectedItem) {
+                currentRoomServices.push({ ...selectedItem, cartId: Date.now() });
+                renderRoomServices();
+                updateBillCalculation();
+            }
+        }
+
+        function removeServiceFromRoom(cartId) {
+            currentRoomServices = currentRoomServices.filter(s => s.cartId !== cartId);
+            renderRoomServices();
+            updateBillCalculation();
+        }
+
+        function renderRoomServices() {
+            const listEl = document.getElementById('room-service-list');
+            listEl.innerHTML = '';
+            
+            if (currentRoomServices.length === 0) {
+                listEl.innerHTML = `<li class="text-gray-400 italic text-xs">Chưa có dịch vụ phát sinh nào.</li>`;
+                return;
+            }
+
+            currentRoomServices.forEach(item => {
+                listEl.innerHTML += `
+                    <li class="flex justify-between items-center bg-white p-2 rounded-xl border">
+                        <span class="text-xs">${item.name} <strong class="text-gray-800">(${item.price.toLocaleString('vi-VN')}đ)</strong></span>
+                        <button onclick="removeServiceFromRoom(${item.cartId})" class="text-red-500 hover:text-red-700 px-2"><i class="fa-solid fa-trash-can text-xs"></i></button>
+                    </li>
+                `;
+            });
+        }
+
+        function updateBillCalculation() {
+            const totalServiceFee = currentRoomServices.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('total-service-fee').innerText = totalServiceFee.toLocaleString('vi-VN') + "đ";
+            
+            const subTotal = sampleBooking.basePrice + totalServiceFee;
+            const discountPercent = parseFloat(document.getElementById('discount-percent').value) || 0;
+            const discountedSubTotal = subTotal * (1 - discountPercent / 100);
+            
+            const vatPrice = discountedSubTotal * 0.1;
+            document.getElementById('vat-price').innerText = Math.round(vatPrice).toLocaleString('vi-VN') + "đ";
+
+            const finalTotal = discountedSubTotal + vatPrice - sampleBooking.depositAmount;
+            document.getElementById('final-total').innerText = Math.round(finalTotal).toLocaleString('vi-VN') + "đ";
+        }
+
+        function performCheckIn() {
+            alert("✅ Check-in thành công! Khách đã nhận phòng thành công.");
+        }
+
+        function performCheckOut() {
+            if (confirm("Xác nhận hoàn tất Check-out và thanh toán hóa đơn?")) {
+                alert("✅ Check-out và thanh toán thành công phòng 305!");
+                closeCheckoutModal();
+            }
+        }
+
+        function printInvoice() {
+            alert("🖨️ Đang in hóa đơn thanh toán...");
+        }
+    </script>
+</body>
+</html>
+    

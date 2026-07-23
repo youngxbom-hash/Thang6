@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Khách sạn Phương Đông</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="min-h-screen flex items-center justify-center bg-[#d6e4ff] overflow-hidden">
+
+    <!-- Container tổng chia đôi màn hình -->
+    <div class="w-full h-screen flex flex-col md:flex-row items-center justify-between">
+        
+        <!-- Bên trái: Ảnh nền khách sạn -->
+        <div class="w-full md:w-3/5 h-full hidden md:block relative">
+            <img src="dn2.webp" alt="Khách sạn Phương Đông" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Bên phải: Khung form đăng nhập -->
+        <div class="w-full md:w-2/5 h-full flex items-center justify-center p-6 md:p-12 bg-[#d6e4ff] overflow-y-auto">
+            <div class="bg-white rounded-[24px] shadow-2xl p-8 md:p-10 w-full max-w-md">
+                
+                <div class="text-center mb-6">
+                    <img src="logoks.jpg" alt="Logo" class="w-16 h-16 mx-auto mb-3 object-contain" onerror="this.src='https://placehold.co/64'">
+                    <h1 class="text-xl font-bold text-gray-900">Khách sạn Phương Đông</h1>
+                    <p class="text-xs text-gray-400 mt-1">Hệ thống quản lý khách sạn</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-700 mb-1.5">Tên đăng nhập / Email</label>
+                        <input type="text" id="username" value="admin@hotel.com" 
+                               class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-700 mb-1.5">Mật khẩu</label>
+                        <input type="password" id="password" value="123456" 
+                               class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600">
+                    </div>
+
+                    <!-- Ghi nhớ đăng nhập + Quên mật khẩu -->
+                    <div class="flex items-center justify-between text-xs pt-1">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" checked class="w-4 h-4 accent-blue-600 rounded">
+                            <span class="text-gray-600">Ghi nhớ đăng nhập</span>
+                        </label>
+                        <a href="#" onclick="forgotPassword()" class="text-blue-600 hover:underline font-medium">
+                            Quên mật khẩu?
+                        </a>
+                    </div>
+
+                    <!-- Hiển thị thông báo lỗi nếu nhập sai -->
+                    <p id="error-msg" class="text-red-500 text-xs text-center font-medium"></p>
+
+                    <!-- Nút Đăng Nhập -->
+                    <button onclick="login()" class="w-full bg-[#2563eb] hover:bg-blue-700 text-white py-3.5 rounded-xl font-semibold text-sm transition shadow-md">
+                        Đăng Nhập
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function login() {
+            const userBox = document.getElementById('username').value.trim();
+            const passBox = document.getElementById('password').value;
+            const errorMsg = document.getElementById('error-msg');
+
+            // Tài khoản hợp lệ mẫu
+            const correctUser = "admin@hotel.com";
+            const correctPass = "123456";
+
+            // Kiểm tra điều kiện tài khoản / mật khẩu
+            if (userBox !== correctUser || passBox !== correctPass) {
+                errorMsg.textContent = "❌ Sai tên đăng nhập hoặc mật khẩu!";
+                return; // Dừng lại, không cho đăng nhập
+            }
+
+            // Nếu đúng tài khoản
+            errorMsg.textContent = "";
+            alert("✅ Đăng nhập thành công!");
+            window.location.href = "index.html";
+        }
+
+        function forgotPassword() {
+            alert("Vui lòng liên hệ quản trị viên hệ thống để cấp lại mật khẩu!");
+        }
+    </script>
+</body>
+</html>

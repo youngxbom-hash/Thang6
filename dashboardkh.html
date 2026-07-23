@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ - Khách sạn Phương Đông</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .hero-bg { background-size: cover; background-position: center; }
+        .room-card:hover .room-img { transform: scale(1.05); }
+        .room-img { transition: transform 0.4s ease; }
+    </style>
+</head>
+<body class="bg-[#f6f8fc] text-gray-800">
+
+    <!-- Top navbar -->
+    <header class="bg-white border-b sticky top-0 z-30">
+        <div class="max-w-screen-2xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="logoks.jpg" alt="Logo" class="w-10 h-10 rounded-lg object-contain" onerror="this.src='https://placehold.co/40x40?text=PD'">
+                <div>
+                    <p class="font-bold text-gray-900 leading-tight">Khách sạn Phương Đông</p>
+                    <p class="text-[11px] text-gray-400 -mt-0.5">Nghỉ dưỡng đẳng cấp, dịch vụ tận tâm</p>
+                </div>
+            </div>
+
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-600">
+                <a href="dashboardkh.html" class="text-blue-600 font-semibold">Trang chủ</a>
+                <a href="search-book.html" class="hover:text-blue-600">Tra cứu & đặt phòng</a>
+                <a href="service-management.html" class="hover:text-blue-600">Tiện nghi</a>
+                <a href="#uu-dai" class="hover:text-blue-600">Ưu đãi</a>
+                <a href="#lien-he" class="hover:text-blue-600">Liên hệ</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button onclick="scrollToBooking()" class="hidden md:inline-flex px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold transition shadow-sm">
+                    Đặt phòng ngay
+                </button>
+                <div class="relative">
+                    <button onclick="toggleUserMenu()" class="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-gray-100 transition">
+                        <div class="w-9 h-9 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center font-semibold text-sm" id="user-initials">KH</div>
+                        <i class="fa-solid fa-chevron-down text-xs text-gray-400"></i>
+                    </button>
+                    <div id="user-menu" class="hidden absolute right-0 mt-2 w-56 bg-white border rounded-2xl shadow-lg overflow-hidden">
+                        <div class="px-4 py-3 border-b">
+                            <p class="text-sm font-semibold text-gray-800" id="user-name">Quý khách</p>
+                            <p class="text-xs text-gray-400" id="user-email">—</p>
+                        </div>
+                        <a href="#" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50"><i class="fa-solid fa-calendar-check w-4"></i> Đặt phòng của tôi</a>
+                        <a href="#" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50"><i class="fa-solid fa-user w-4"></i> Thông tin tài khoản</a>
+                        <button onclick="logout()" class="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50"><i class="fa-solid fa-right-from-bracket w-4"></i> Đăng xuất</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero + booking widget -->
+    <section class="relative hero-bg" style="background-image: linear-gradient(180deg, rgba(15,23,42,0.15), rgba(15,23,42,0.55)), url('dn2.webp');">
+        <div class="max-w-screen-2xl mx-auto px-6 md:px-10 pt-20 pb-32 md:pt-28 md:pb-40">
+            <p class="text-blue-200 font-semibold tracking-wide text-sm mb-3">CHÀO MỪNG TRỞ LẠI</p>
+            <h1 id="hero-greeting" class="text-3xl md:text-5xl font-extrabold text-white max-w-2xl leading-tight">
+                Xin chào, hãy chọn phòng cho chuyến nghỉ dưỡng tiếp theo của bạn
+            </h1>
+            <p class="text-white/80 mt-4 max-w-xl">Đặt phòng nhanh chóng, xem ưu đãi mới nhất và theo dõi toàn bộ lịch lưu trú của bạn tại một nơi duy nhất.</p>
+        </div>
+
+        <!-- Booking widget -->
+        <div id="booking" class="max-w-screen-xl mx-auto px-6 md:px-10 -mt-16 md:-mt-20 relative z-10">
+            <div class="bg-white rounded-3xl shadow-xl p-6 md:p-8 grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-500 mb-1.5">Ngày nhận phòng</label>
+                    <input type="date" id="checkin" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-500 mb-1.5">Ngày trả phòng</label>
+                    <input type="date" id="checkout" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-500 mb-1.5">Số khách</label>
+                    <select id="guests" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:border-blue-600">
+                        <option>1 khách</option>
+                        <option selected>2 khách</option>
+                        <option>3 khách</option>
+                        <option>4 khách trở lên</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-500 mb-1.5">Loại phòng</label>
+                    <select id="roomType" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:border-blue-600">
+                        <option value="">Tất cả loại phòng</option>
+                        <option>Standard</option>
+                        <option>Standard City View</option>
+                        <option>Deluxe Garden</option>
+                        <option>Deluxe Ocean View</option>
+                        <option>Suite Executive</option>
+                    </select>
+                </div>
+                <button onclick="searchRooms()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-sm transition shadow-sm flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass"></i> Tìm phòng trống
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-screen-2xl mx-auto px-6 md:px-10">
+
+        <!-- Đặt phòng sắp tới -->
+        <section class="mt-16 md:mt-24">
+            <div id="upcoming-booking-card" class="hidden bg-white border rounded-3xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-door-open"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-400">Đặt phòng sắp tới của bạn</p>
+                        <p class="font-semibold text-gray-800" id="upcoming-booking-text">Phòng 412 · Suite Executive · 24 - 26/07/2026</p>
+                    </div>
+                </div>
+                <button class="px-5 py-2.5 border border-gray-200 hover:bg-gray-50 rounded-xl text-sm font-medium transition">Xem chi tiết</button>
+            </div>
+        </section>
+
+        <!-- Loại phòng nổi bật -->
+        <section id="phong" class="mt-16 md:mt-20">
+            <div class="flex items-end justify-between mb-8">
+                <div>
+                    <p class="text-blue-600 font-semibold text-sm mb-1">LOẠI PHÒNG</p>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Chọn không gian phù hợp với bạn</h2>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="room-grid"></div>
+        </section>
+
+        <!-- Tiện nghi -->
+        <section id="tien-nghi" class="mt-16 md:mt-20">
+            <p class="text-blue-600 font-semibold text-sm mb-1">TIỆN NGHI</p>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Mọi thứ bạn cần cho kỳ nghỉ trọn vẹn</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div class="bg-white border rounded-2xl p-5 text-center hover:shadow-md transition">
+                    <i class="fa-solid fa-person-swimming text-blue-600 text-2xl mb-3"></i>
+                    <p class="text-sm font-medium text-gray-700">Hồ bơi ngoài trời</p>
+                </div>
+                <div class="bg-white border rounded-2xl p-5 text-center hover:shadow-md transition">
+                    <i class="fa-solid fa-utensils text-blue-600 text-2xl mb-3"></i>
+                    <p class="text-sm font-medium text-gray-700">Nhà hàng &amp; buffet</p>
+                </div>
+                <div class="bg-white border rounded-2xl p-5 text-center hover:shadow-md transition">
+                    <i class="fa-solid fa-spa text-blue-600 text-2xl mb-3"></i>
+                    <p class="text-sm font-medium text-gray-700">Spa &amp; massage</p>
+                </div>
+                <div class="bg-white border rounded-2xl p-5 text-center hover:shadow-md transition">
+                    <i class="fa-solid fa-dumbbell text-blue-600 text-2xl mb-3"></i>
+                    <p class="text-sm font-medium text-gray-700">Phòng gym</p>
+                </div>
+                <div class="bg-white border rounded-2xl p-5 text-center hover:shadow-md transition">
+                    <i class="fa-solid fa-car text-blue-600 text-2xl mb-3"></i>
+                    <p class="text-sm font-medium text-gray-700">Đưa đón sân bay</p>
+                </div>
+                <div class="bg-white border rounded-2xl p-5 text-center hover:shadow-md transition">
+                    <i class="fa-solid fa-wifi text-blue-600 text-2xl mb-3"></i>
+                    <p class="text-sm font-medium text-gray-700">Wifi miễn phí</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ưu đãi -->
+        <section id="uu-dai" class="mt-16 md:mt-20">
+            <p class="text-blue-600 font-semibold text-sm mb-1">ƯU ĐÃI</p>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Ưu đãi đang diễn ra</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="rounded-3xl p-6 text-white bg-gradient-to-br from-blue-600 to-blue-800">
+                    <p class="text-xs font-semibold text-blue-100 mb-2">ĐẶT SỚM</p>
+                    <p class="text-xl font-bold mb-2">Giảm 20% khi đặt trước 30 ngày</p>
+                    <p class="text-sm text-blue-100">Áp dụng cho tất cả loại phòng, đặt từ 2 đêm trở lên.</p>
+                </div>
+                <div class="rounded-3xl p-6 text-white bg-gradient-to-br from-emerald-600 to-emerald-800">
+                    <p class="text-xs font-semibold text-emerald-100 mb-2">CUỐI TUẦN</p>
+                    <p class="text-xl font-bold mb-2">Tặng buffet sáng cho 2 người</p>
+                    <p class="text-sm text-emerald-100">Khi lưu trú từ thứ 6 đến chủ nhật hàng tuần.</p>
+                </div>
+                <div class="rounded-3xl p-6 text-white bg-gradient-to-br from-amber-500 to-amber-700">
+                    <p class="text-xs font-semibold text-amber-100 mb-2">KHÁCH THÂN THIẾT</p>
+                    <p class="text-xl font-bold mb-2">Tích điểm đổi đêm nghỉ miễn phí</p>
+                    <p class="text-sm text-amber-100">Mỗi lần đặt phòng đều được cộng điểm thành viên.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Liên hệ / Footer -->
+        <footer id="lien-he" class="mt-20 border-t pt-10 pb-12 text-sm text-gray-500">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <img src="logoks.jpg" alt="Logo" class="w-8 h-8 rounded object-contain" onerror="this.src='https://placehold.co/32x32?text=PD'">
+                        <p class="font-bold text-gray-800">Khách sạn Phương Đông</p>
+                    </div>
+                    <p>123 Đường Biển, TP. Nha Trang, Việt Nam</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-gray-700 mb-2">Liên hệ</p>
+                    <p><i class="fa-solid fa-phone mr-2"></i>1900 1234</p>
+                    <p><i class="fa-solid fa-envelope mr-2"></i>lienhe@phuongdonghotel.vn</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-gray-700 mb-2">Tài khoản</p>
+                    <a href="dangnhapkh.html" class="block hover:text-blue-600">Đăng nhập</a>
+                    <a href="dangky.html" class="block hover:text-blue-600">Đăng ký</a>
+                </div>
+            </div>
+            <p class="mt-8 text-xs text-gray-400">© 2026 Khách sạn Phương Đông. Đã đăng ký bản quyền.</p>
+        </footer>
+    </main>
+
+    <script>
+        const rooms = [
+            { name: "Standard", desc: "Ấm cúng, tiện nghi cơ bản", price: 650000, img: "https://picsum.photos/seed/homestandard/400/260" },
+            { name: "Standard City View", desc: "Hướng nhìn ra thành phố", price: 780000, img: "https://picsum.photos/seed/homecityview/400/260" },
+            { name: "Deluxe Garden", desc: "Không gian xanh mát yên tĩnh", price: 950000, img: "https://picsum.photos/seed/homegarden/400/260" },
+            { name: "Deluxe Ocean View", desc: "Toàn cảnh hướng biển", price: 1350000, img: "https://picsum.photos/seed/homeoceanview/400/260" },
+        ];
+
+        function formatVND(n) {
+            return n.toLocaleString('vi-VN') + ' đ / đêm';
+        }
+
+        function renderRooms() {
+            const grid = document.getElementById('room-grid');
+            grid.innerHTML = rooms.map(r => `
+                <div class="room-card bg-white border rounded-3xl overflow-hidden hover:shadow-lg transition">
+                    <div class="overflow-hidden h-44">
+                        <img src="${r.img}" alt="${r.name}" class="room-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-5">
+                        <p class="font-semibold text-gray-800">${r.name}</p>
+                        <p class="text-xs text-gray-400 mt-1">${r.desc}</p>
+                        <div class="flex items-center justify-between mt-4">
+                            <p class="text-blue-600 font-bold">${formatVND(r.price)}</p>
+                            <button onclick="bookRoom('${r.name}')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold transition">Đặt ngay</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function bookRoom(name) {
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const guests = document.getElementById('guests').value;
+            const params = new URLSearchParams({ roomType: name, guests });
+            if (checkin) params.set('checkin', checkin);
+            if (checkout) params.set('checkout', checkout);
+            window.location.href = `search-book.html?${params.toString()}`;
+        }
+
+        function searchRooms() {
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const guests = document.getElementById('guests').value;
+            const roomType = document.getElementById('roomType').value;
+            if (!checkin || !checkout) {
+                alert('Vui lòng chọn ngày nhận phòng và trả phòng!');
+                return;
+            }
+            if (new Date(checkout) <= new Date(checkin)) {
+                alert('Ngày trả phòng phải sau ngày nhận phòng!');
+                return;
+            }
+            const params = new URLSearchParams({ checkin, checkout, guests });
+            if (roomType) params.set('roomType', roomType);
+            window.location.href = `search-book.html?${params.toString()}`;
+        }
+
+        function scrollToBooking() {
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleUserMenu() {
+            document.getElementById('user-menu').classList.toggle('hidden');
+        }
+
+        function logout() {
+            sessionStorage.removeItem('loggedInCustomer');
+            window.location.href = "dangnhapkh.html";
+        }
+
+        function loadCustomer() {
+            const raw = sessionStorage.getItem('loggedInCustomer');
+            if (!raw) return;
+            try {
+                const customer = JSON.parse(raw);
+                if (customer.fullName) {
+                    document.getElementById('user-name').textContent = customer.fullName;
+                    document.getElementById('hero-greeting').textContent = `Xin chào ${customer.fullName}, hãy chọn phòng cho chuyến nghỉ dưỡng tiếp theo`;
+                    const initials = customer.fullName.trim().split(' ').slice(-2).map(w => w[0]).join('').toUpperCase();
+                    document.getElementById('user-initials').textContent = initials || 'KH';
+                }
+                if (customer.email) document.getElementById('user-email').textContent = customer.email;
+            } catch (e) {}
+        }
+
+        window.addEventListener('click', (e) => {
+            const menu = document.getElementById('user-menu');
+            if (!menu.contains(e.target) && !e.target.closest('button[onclick="toggleUserMenu()"]')) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        renderRooms();
+        loadCustomer();
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Khách Lưu Trú - HotelPro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <div class="w-72 sidebar text-slate-200 flex flex-col">
+        <div class="p-6 border-b border-slate-700">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11  flex items-center justify-center text-3xl shadow"><img src="logoks.jpg" alt="Khách sạn"></div>
+                <div>
+                    <h1 class="text-3xl text-center text-black">Khách Sạn Phương Đông</h1>
+                    <p class="text-xs text-center text-black -mt-1">Hotel Management System</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 p-4 space-y-1">
+    <a href="dashboard.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100 active">
+        <i class="fa-solid fa-house w-5"></i>
+        <span>Dashboard</span>
+    </a>
+    
+    <a href="Tracuu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-magnifying-glass w-5"></i>
+        <span>Tra cứu & Đặt Phòng</span>
+    </a>
+    
+    <a href="quanlydichvu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-bed w-5"></i>
+        <span>Quản lý dịch vụ</span>
+    </a>
+    
+    <a href="room-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-door-open w-5"></i>
+        <span>Quản lý Phòng</span>
+    </a>
+    
+    <a href="create-booking.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-plus w-5"></i>
+        <span>Tạo Đặt Phòng</span>
+    </a>
+    
+    <a href="check-in-out.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-key w-5"></i>
+        <span>Check-in / Check-out</span>
+    </a>
+    
+    <a href="guest-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-users w-5"></i>
+        <span>Khách Lưu Trú</span>
+    </a>
+    
+    <a href="front-desk.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-map w-5"></i>
+        <span>Bảng điều khiển Front Desk</span>
+    </a>
+    
+    <a href="reports.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-chart-column w-5"></i>
+        <span>Báo cáo & Thống kê</span>
+    </a>
+</nav>
+        <div class="p-4 border-t border-slate-700">
+            <div class="flex items-center gap-3 p-3 bg-slate-800 rounded-2xl">
+                <div class="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">NV</div>
+                <div class="flex-1">
+                    <p class="font-medium">Nguyễn Văn A</p>
+                    <p class="text-xs text-slate-400">Lễ tân trưởng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <header class="bg-white border-b px-8 py-5 flex items-center justify-between sticky top-0 z-10">
+                <h2 class="text-3xl font-semibold text-gray-800">Quản lý Khách Lưu Trú</h2>
+                <div class="flex items-center gap-4">
+                </div>
+            </header>
+            <div class="p-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-4xl font-bold text-gray-800">Danh sách khách đang ở khách sạn • Hôm nay: 09/07/2026</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="text" id="searchGuest" placeholder="Tìm theo tên, SĐT, phòng..." 
+                       onkeyup="searchGuests()"
+                       class="px-6 py-4 w-96 border border-gray-200 rounded-3xl focus:outline-none focus:border-blue-500">
+            </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="grid grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-3xl p-6 text-center">
+                <p class="text-4xl font-bold text-emerald-600">24</p>
+                <p class="text-gray-500 text-sm">Khách đang lưu trú</p>
+            </div>
+            <div class="bg-white rounded-3xl p-6 text-center">
+                <p class="text-4xl font-bold text-amber-600">7</p>
+                <p class="text-gray-500 text-sm">Hôm nay check-out</p>
+            </div>
+            <div class="bg-white rounded-3xl p-6 text-center">
+                <p class="text-4xl font-bold text-blue-600">12</p>
+                <p class="text-gray-500 text-sm">VIP / Khách quen</p>
+            </div>
+            <div class="bg-white rounded-3xl p-6 text-center">
+                <p class="text-4xl font-bold text-purple-600">3</p>
+                <p class="text-gray-500 text-sm">Yêu cầu đặc biệt</p>
+            </div>
+        </div>
+
+        <!-- Danh sách khách -->
+        <div class="bg-white rounded-3xl shadow overflow-hidden">
+            <table class="w-full">
+                <thead class="bg-gray-50">
+                    <tr class="border-b">
+                        <th class="text-left p-6 font-medium">Khách hàng</th>
+                        <th class="text-left p-6 font-medium">Phòng</th>
+                        <th class="text-left p-6 font-medium">Thời gian lưu trú</th>
+                        <th class="text-left p-6 font-medium">Trạng thái thanh toán</th>
+                        <th class="text-left p-6 font-medium">Ghi chú</th>
+                        <th class="text-left p-6 font-medium">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="guestTable" class="divide-y text-sm">
+                    <!-- JS render -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const guests = [
+            {
+                name: "Trần Thị Bích",
+                phone: "0912345678",
+                room: "305",
+                type: "Deluxe Ocean View",
+                checkIn: "15/07/2026",
+                checkOut: "18/07/2026",
+                payment: "Đã thanh toán",
+                note: "Dị ứng hải sản • VIP"
+            },
+            {
+                name: "Lê Hoàng Minh",
+                phone: "0987654321",
+                room: "412",
+                type: "Suite Executive",
+                checkIn: "14/07/2026",
+                checkOut: "20/07/2026",
+                payment: "Chưa thanh toán",
+                note: "Yêu cầu thêm gối"
+            },
+            {
+                name: "Phạm Anh Tuấn",
+                phone: "0978123456",
+                room: "201",
+                type: "Standard",
+                checkIn: "16/07/2026",
+                checkOut: "17/07/2026",
+                payment: "Đã thanh toán",
+                note: ""
+            },
+            {
+                name: "Nguyễn Thị Hoa",
+                phone: "0909123456",
+                room: "520",
+                type: "Deluxe",
+                checkIn: "15/07/2026",
+                checkOut: "19/07/2026",
+                payment: "Đã thanh toán",
+                note: "Khách quen"
+            }
+        ];
+
+        function renderGuests(data = guests) {
+            const tbody = document.getElementById('guestTable');
+            let html = '';
+
+            data.forEach(guest => {
+                const isVIP = guest.note.includes("VIP") || guest.note.includes("Khách quen");
+                
+                html += `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="p-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-2xl flex items-center justify-center text-xl">👤</div>
+                                <div>
+                                    <p class="font-medium">${guest.name}</p>
+                                    <p class="text-xs text-gray-500">${guest.phone}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-6">
+                            <span class="font-mono font-semibold">${guest.room}</span><br>
+                            <span class="text-xs text-gray-500">${guest.type}</span>
+                        </td>
+                        <td class="p-6">
+                            <div class="text-sm">
+                                <span class="text-emerald-600">${guest.checkIn}</span> 
+                                → 
+                                <span class="text-red-600">${guest.checkOut}</span>
+                            </div>
+                        </td>
+                        <td class="p-6">
+                            <span class="${guest.payment === 'Đã thanh toán' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} px-4 py-1 rounded-full text-xs font-medium">
+                                ${guest.payment}
+                            </span>
+                        </td>
+                        <td class="p-6 text-sm ${isVIP ? 'text-amber-600 font-medium' : 'text-gray-500'}">
+                            ${guest.note || '—'}
+                        </td>
+                        <td class="p-6">
+                            <div class="flex gap-2">
+                                <button onclick="viewGuestDetail('${guest.name}')" 
+                                        class="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-xl text-sm">Chi tiết</button>
+                                <button onclick="editNote('${guest.name}')" 
+                                        class="px-4 py-2 text-amber-600 hover:bg-amber-50 rounded-xl text-sm">Ghi chú</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function searchGuests() {
+            const keyword = document.getElementById('searchGuest').value.toLowerCase();
+            const filtered = guests.filter(g => 
+                g.name.toLowerCase().includes(keyword) || 
+                g.phone.includes(keyword) ||
+                g.room.includes(keyword)
+            );
+            renderGuests(filtered);
+        }
+
+        function viewGuestDetail(name) {
+            alert(`📋 Chi tiết khách: ${name}\n\nPhòng: 305\nLịch sử lưu trú: 3 lần\nTổng chi tiêu: 18.450.000đ`);
+        }
+
+        function editNote(name) {
+            const note = prompt(`Ghi chú cho khách ${name}:`, "Dị ứng hải sản");
+            if (note !== null) {
+                alert(`✅ Đã cập nhật ghi chú cho khách ${name}`);
+                renderGuests();
+            }
+        }
+
+        // Khởi tạo
+        window.onload = () => renderGuests();
+    </script>
+</body>
+</html>

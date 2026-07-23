@@ -1,0 +1,62 @@
+/* =============================================
+   STYLE.CSS - MÀU CHÍNH #66CCFF
+   ============================================= */
+
+* {
+    font-family: 'Inter', system_ui, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #b3c4ee 0%, #a4c9f9 50%, #a6bef8 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    color: #050607;
+}
+
+.main-container {
+    background: rgba(87, 136, 252, 0.9);
+    backdrop-filter: blur(16px);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(121, 176, 227, 0.4);
+}
+
+/* Màu chính #66CCFF */
+.btn-primary {
+    background: linear-gradient(to right, #66CCFF, #40B9FF);
+    color: #0f172a;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, #40B9FF, #66CCFF);
+    transform: translateY(-2px);
+}
+
+/* Sidebar */
+.sidebar {
+    background: #789cf1;
+    border-right: 1px solid #1b7aff;
+}
+
+.nav-item {
+    transition: all 0.2s;
+}
+
+.nav-item:hover, .nav-item-active {
+    background: #66CCFF !important;
+    color: #2063ff !important;
+}
+
+/* Trạng thái phòng */
+.room-ready { background-color: #34d399; color: #0f172a; }
+.room-occupied { background-color: #f87171; color: white; }
+.room-cleaning { background-color: #fbbf24; color: #2869ff; }
+.room-maintenance { background-color: #3086ff; color: white; }
+
+h1, h2, h3 {
+    color: #66CCFF;
+}
+
+.text-primary { color: #66CCFF; }

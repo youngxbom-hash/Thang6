@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotelPro - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .stat-card { transition: all 0.3s; }
+        .stat-card:hover { transform: translateY(-6px); }
+
+        /* Fallback styles in case style.css is not present, so the sidebar
+           still looks correct even without the external stylesheet */
+        .sidebar { background-color: #eef2ff; border-right: 1px solid #e0e7ff; }
+        .nav-item { transition: background-color .15s, color .15s; }
+        .nav-item:hover { background-color: #e0e7ff; }
+        .nav-item.active { background-color: #2563eb; color: #fff !important; }
+
+        .room-card { transition: transform .2s, box-shadow .2s; }
+        .room-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0,0,0,0.12); }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex h-screen overflow-hidden bg-blue-50/40">
+    <!-- Sidebar -->
+    <div class="w-72 sidebar text-slate-200 flex flex-col">
+        <div class="p-6 border-b border-slate-700">
+                <div class="flex items-center gap-3">
+                <div class="w-11 h-11 flex items-center justify-center text-3xl shadow rounded-lg overflow-hidden bg-white">
+                    <img src="logoks.jpg" alt="Khách sạn" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🏨'}))">
+                </div>
+                    <div>
+                    <h1 class="text-lg font-bold text-black leading-tight">Khách Sạn Phương Đông</h1>
+                    <p class="text-xs text-black -mt-1">Hotel Management System</p>
+                </div>
+            </div>
+        </div>
+
+            <nav class="flex-1 p-4 space-y-1">
+    <a href="dashboard.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100 active">
+        <i class="fa-solid fa-house w-5"></i>
+        <span>Dashboard</span>
+    </a>
+    
+    <a href="Tracuu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-magnifying-glass w-5"></i>
+        <span>Tra cứu & Đặt Phòng</span>
+    </a>
+    
+    <a href="quanlydichvu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-bed w-5"></i>
+        <span>Quản lý dịch vụ</span>
+    </a>
+    
+    <a href="room-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-door-open w-5"></i>
+        <span>Quản lý Phòng</span>
+    </a>
+    
+    <a href="create-booking.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-plus w-5"></i>
+        <span>Tạo Đặt Phòng</span>
+    </a>
+    
+    <a href="check-in-out.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-key w-5"></i>
+        <span>Check-in / Check-out</span>
+    </a>
+    
+    <a href="guest-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-users w-5"></i>
+        <span>Khách Lưu Trú</span>
+    </a>
+    
+    <a href="front-desk.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-map w-5"></i>
+        <span>Bảng điều khiển Front Desk</span>
+    </a>
+    
+    <a href="reports.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-chart-column w-5"></i>
+        <span>Báo cáo & Thống kê</span>
+    </a>
+</nav>
+
+        <div class="p-4 border-t border-slate-700">
+            <div class="flex items-center gap-3 p-3 bg-slate-800 rounded-2xl">
+                <div class="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">NV</div>
+                <div class="flex-1">
+                    <p class="font-medium text-white">Nguyễn Văn A</p>
+                    <p class="text-xs text-slate-400">Lễ tân trưởng</p>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+        <header class="bg-white border-b px-8 py-6 flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-semibold text-gray-800">Tra cứu & Đặt phòng</h1>
+                <p class="text-gray-500">Tìm phòng và đặt ngay</p>
+            </div>
+            </header>
+
+            <div class="p-8">
+            <!-- Search Form -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm mb-10">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div>
+                        <label class="block text-sm font-medium text-gray-600 mb-2">Ngày nhận phòng</label>
+                        <input id="checkin-date" type="date" value="2026-07-15" class="w-full border border-gray-300 rounded-2xl px-5 py-4">
+                        </div>
+                        <div>
+                        <label class="block text-sm font-medium text-gray-600 mb-2">Ngày trả phòng</label>
+                        <input id="checkout-date" type="date" value="2026-07-20" class="w-full border border-gray-300 rounded-2xl px-5 py-4">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-2">Số khách</label>
+                        <select id="guest-count" class="w-full border border-gray-300 rounded-2xl px-5 py-4">
+                                <option>2 người lớn</option>
+                                <option>3 người lớn</option>
+                            <option>4 người lớn</option>
+                            </select>
+                        </div>
+                        <div class="flex items-end">
+                        <button onclick="searchRooms()"
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-semibold flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                                TÌM PHÒNG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Filters -->
+            <div class="flex gap-3 mb-8">
+                <button data-type="all" onclick="filterRooms(this)" class="filter-btn px-6 py-3 border rounded-2xl font-medium hover:bg-gray-100 bg-blue-600 text-white">Tất cả</button>
+                <button data-type="Deluxe" onclick="filterRooms(this)" class="filter-btn px-6 py-3 border rounded-2xl font-medium hover:bg-gray-100">Deluxe</button>
+                <button data-type="Suite" onclick="filterRooms(this)" class="filter-btn px-6 py-3 border rounded-2xl font-medium hover:bg-gray-100">Suite</button>
+                <button data-type="View Biển" onclick="filterRooms(this)" class="filter-btn px-6 py-3 border rounded-2xl font-medium hover:bg-gray-100">View Biển</button>
+            </div>
+
+            <!-- Room List -->
+            <div id="room-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Room Detail Modal -->
+    <div id="detail-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/50" onclick="closeDetailModal()"></div>
+        <div class="relative bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-xl">
+            <button onclick="closeDetailModal()"
+                    class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow z-10">
+                <i class="fa-solid fa-xmark text-gray-600"></i>
+            </button>
+            <div id="detail-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const rooms = [
+            {
+                id: 305, name: "Deluxe Ocean View", price: 2450000, type: "Deluxe", status: "available",
+                image: "phong1.jpg",
+                area: 45, capacity: 3, bed: "1 giường King hoặc 2 giường Twin",
+                amenities: ["WiFi miễn phí", "Bể bơi", "View biển", "Điều hòa", "Minibar", "TV màn hình phẳng"],
+                description: "Phòng Deluxe với ban công riêng hướng biển, không gian mở, ánh sáng tự nhiên và nội thất hiện đại, phù hợp cho kỳ nghỉ thư giãn."
+            },
+            {
+                id: 412, name: "Executive Suite", price: 4800000, type: "Suite", status: "available",
+                image: "phong2.jpg",
+                area: 72, capacity: 4, bed: "1 giường King + Sofa bed",
+                amenities: ["WiFi miễn phí", "Bể bơi", "Minibar", "Phòng khách riêng", "Bồn tắm", "Máy pha cà phê"],
+                description: "Suite cao cấp với phòng khách và phòng ngủ riêng biệt, không gian rộng rãi lý tưởng cho gia đình hoặc khách công tác dài ngày."
+            },
+            {
+                id: 201, name: "Standard City View", price: 1850000, type: "Standard", status: "booked",
+                image: "phong3.jpg",
+                area: 32, capacity: 2, bed: "1 giường Queen",
+                amenities: ["WiFi miễn phí", "Điều hòa", "TV màn hình phẳng"],
+                description: "Phòng Standard gọn gàng, tiện nghi cơ bản đầy đủ, hướng nhìn ra thành phố, phù hợp cho khách đi công tác ngắn ngày."
+            }
+        ];
+
+        let currentFilter = "all";
+
+        function renderRooms() {
+            const container = document.getElementById('room-list');
+            const filtered = currentFilter === "all"
+                ? rooms
+                : rooms.filter(r => r.type === currentFilter);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-16 text-gray-400">
+                        <i class="fa-solid fa-bed-pulse text-4xl mb-3"></i>
+                        <p>Không tìm thấy phòng phù hợp với bộ lọc này.</p>
+                    </div>`;
+                return;
+            }
+
+            let html = '';
+            filtered.forEach(room => {
+                const isAvailable = room.status === 'available';
+                html += `
+                    <div class="room-card bg-white rounded-3xl overflow-hidden border">
+                        <img src="${room.image}" class="w-full h-52 object-cover" alt="${room.name}">
+                        <div class="p-6">
+                            <div class="flex justify-between items-center">
+                                <span class="px-4 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded-full">${room.type}</span>
+                                <span class="text-xs font-medium ${isAvailable ? 'text-emerald-600' : 'text-red-600'}">
+                                    ${isAvailable ? 'Sẵn sàng' : 'Đã đặt'}
+                                </span>
+                            </div>
+                            <h3 class="font-semibold text-xl mt-3">${room.name}</h3>
+                            <p class="text-3xl font-bold text-blue-600 mt-2">${(room.price/1000000).toFixed(1)}tr <span class="text-sm font-normal text-gray-400">/đêm</span></p>
+
+                            <div class="mt-6 flex gap-3">
+                                <button onclick="viewRoomDetail(${room.id})"
+        class="flex-1 py-4 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 rounded-2xl font-semibold">
+    Xem chi tiết
+</button>
+                                <button
+                                    ${isAvailable ? `onclick="bookRoom(${room.id})"` : 'disabled'}
+                                    class="flex-1 py-4 ${isAvailable ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer' : 'bg-gray-300 cursor-not-allowed'} text-white rounded-2xl font-semibold">
+                                    ${isAvailable ? 'Đặt ngay' : 'Đã đặt'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function searchRooms() {
+            const container = document.getElementById('room-list');
+            container.style.transition = 'opacity .2s';
+            container.style.opacity = '0.6';
+            setTimeout(() => {
+                container.style.opacity = '1';
+                renderRooms();
+            }, 400);
+        }
+
+        function bookRoom(id) {
+            const room = rooms.find(r => r.id === id);
+            if (!room || room.status !== 'available') return;
+            alert(`Đặt phòng ${room.name} thành công! Mã đặt: BK-${Math.floor(100000 + Math.random() * 900000)}`);
+        }
+
+        function filterRooms(btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('bg-blue-600', 'text-white'));
+            btn.classList.add('bg-blue-600', 'text-white');
+            currentFilter = btn.dataset.type;
+            renderRooms();
+        }
+        function viewRoomDetail(id) {
+    window.location.href = `xemchitiet.html?id=${id}`;
+}
+        function showRoomDetail(id) {
+            const room = rooms.find(r => r.id === id);
+            if (!room) return;
+            const isAvailable = room.status === 'available';
+
+            document.getElementById('detail-content').innerHTML = `
+                <img src="${room.image}" class="w-full h-64 object-cover rounded-t-3xl" alt="${room.name}">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="px-4 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded-full">${room.type}</span>
+                        <span class="text-xs font-medium ${isAvailable ? 'text-emerald-600' : 'text-red-600'}">
+                            ${isAvailable ? 'Sẵn sàng' : 'Đã đặt'}
+                        </span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">${room.name}</h2>
+                    <p class="text-gray-500 mt-1">Phòng ${room.id} &middot; ${room.area}m² &middot; Tối đa ${room.capacity} khách</p>
+
+                    <p class="text-gray-600 mt-4 leading-relaxed">${room.description}</p>
+
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <div class="bg-gray-50 rounded-2xl p-4">
+                            <p class="text-xs text-gray-400 mb-1">Diện tích</p>
+                            <p class="font-semibold text-gray-800"><i class="fa-solid fa-ruler-combined mr-2 text-blue-500"></i>${room.area} m²</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-2xl p-4">
+                            <p class="text-xs text-gray-400 mb-1">Sức chứa</p>
+                            <p class="font-semibold text-gray-800"><i class="fa-solid fa-user-group mr-2 text-blue-500"></i>${room.capacity} người</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-2xl p-4 col-span-2">
+                            <p class="text-xs text-gray-400 mb-1">Giường</p>
+                            <p class="font-semibold text-gray-800"><i class="fa-solid fa-bed mr-2 text-blue-500"></i>${room.bed}</p>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-gray-400 mt-6 mb-2">Tiện nghi</p>
+                    <div class="flex flex-wrap gap-2">
+                        ${room.amenities.map(a => `<span class="text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full">${a}</span>`).join('')}
+                    </div>
+
+                    <div class="flex items-end justify-between mt-8 pt-6 border-t">
+                        <div>
+                            <p class="text-3xl font-bold text-blue-600">${(room.price/1000000).toFixed(1)}tr</p>
+                            <p class="text-sm text-gray-400">/đêm</p>
+                        </div>
+                        <button
+                            ${isAvailable ? `onclick="bookRoom(${room.id}); closeDetailModal()"` : 'disabled'}
+                            class="px-8 py-4 ${isAvailable ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer' : 'bg-gray-300 cursor-not-allowed'} text-white rounded-2xl font-semibold">
+                            ${isAvailable ? 'Đặt ngay' : 'Đã đặt'}
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            const modal = document.getElementById('detail-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDetailModal() {
+            const modal = document.getElementById('detail-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeDetailModal();
+        });
+
+        window.onload = renderRooms;
+    </script>
+</body>
+</html>

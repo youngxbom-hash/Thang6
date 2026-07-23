@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phương Đông - Quản Lý Khách Sạn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <div class="w-72 sidebar text-slate-200 flex flex-col">
+        <div class="p-6 border-b border-slate-700">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11  flex items-center justify-center text-3xl shadow"><img src="logoks.jpg" alt="Khách sạn"></div>
+                <div>
+                    <h1 class="text-3xl text-center text-black">Khách Sạn Phương Đông</h1>
+                    <p class="text-xs text-center text-black -mt-1">Hotel Management System</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 p-4 space-y-1">
+            <a href="dashboard.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-gauge-high w-5"></i>
+                <span>Trang chủ</span>
+            </a>
+            <a href="search-book.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-magnifying-glass w-5"></i>
+                <span>Tra cứu & Đặt phòng</span>
+            </a>
+            <a href="service-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-concierge-bell w-5"></i><span>Quản lý Dịch vụ & Tiện nghi</span>
+            </a>
+            <a href="room-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-door-open w-5"></i>
+                <span>Quản lý Phòng</span>
+            </a>
+            <a href="create-booking.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-plus w-5"></i>
+                <span>Tạo Đặt Phòng</span>
+            </a>
+            <a href="check-in-out.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-key w-5"></i>
+                <span>Check-in / Check-out</span>
+            </a>
+            <a href="guest-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-users w-5"></i>
+                <span>Khách Lưu Trú</span>
+            </a>
+            <a href="front-desk.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-map w-5"></i>
+                <span>Bảng điều khiển </span>
+            </a>
+            <a href="reports.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-black hover:text-black">
+                <i class="fa-solid fa-chart-column w-5"></i>
+                <span>Báo cáo & thống kê</span>
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-slate-700">
+            <div class="flex items-center gap-3 p-3 bg-slate-800 rounded-2xl">
+                <div class="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">NV</div>
+                <div class="flex-1">
+                    <p class="font-medium">Nguyễn Văn A</p>
+                    <p class="text-xs text-slate-400">Lễ tân trưởng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 overflow-auto p-8" id="main-content">
+        <h1 class="text-5xl font-bold text-black text-center mt-32">Chào mừng đến với Phương Đông </h1>
+        <p class="text-black text-center mt-4 text-lg">Chọn chức năng từ menu bên trái để bắt đầu</p>
+    </div>
+</body>
+</html>

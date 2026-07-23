@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển Front Desk - HotelPro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .room {
+            transition: all 0.2s ease;
+        }
+        .room:hover {
+            transform: scale(1.08);
+            z-index: 10;
+        }
+        .room-ready { background-color: #10b981; color: white; }     /* Sẵn sàng */
+        .room-occupied { background-color: #ef4444; color: white; }  /* Đang sử dụng */
+        .room-cleaning { background-color: #f59e0b; color: white; }  /* Đang dọn */
+        .room-maintenance { background-color: rgb(45, 45, 45); color: white; } /* Bảo trì */
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <div class="w-72 sidebar text-slate-200 flex flex-col">
+        <div class="p-6 border-b border-slate-700">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11  flex items-center justify-center text-3xl shadow"><img src="logoks.jpg" alt="Khách sạn"></div>
+                <div>
+                    <h1 class="text-3xl text-center text-black">Khách Sạn Phương Đông</h1>
+                    <p class="text-xs text-center text-black -mt-1">Hotel Management System</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 p-4 space-y-1">
+    <a href="dashboard.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100 active">
+        <i class="fa-solid fa-house w-5"></i>
+        <span>Dashboard</span>
+    </a>
+    
+    <a href="Tracuu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-magnifying-glass w-5"></i>
+        <span>Tra cứu & Đặt Phòng</span>
+    </a>
+    
+    <a href="quanlydichvu.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-bed w-5"></i>
+        <span>Quản lý dịch vụ</span>
+    </a>
+    
+    <a href="room-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-door-open w-5"></i>
+        <span>Quản lý Phòng</span>
+    </a>
+    
+    <a href="create-booking.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-plus w-5"></i>
+        <span>Tạo Đặt Phòng</span>
+    </a>
+    
+    <a href="check-in-out.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-key w-5"></i>
+        <span>Check-in / Check-out</span>
+    </a>
+    
+    <a href="guest-management.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-users w-5"></i>
+        <span>Khách Lưu Trú</span>
+    </a>
+    
+    <a href="front-desk.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-map w-5"></i>
+        <span>Bảng điều khiển Front Desk</span>
+    </a>
+    
+    <a href="reports.html" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl text-gray-700 hover:bg-gray-100">
+        <i class="fa-solid fa-chart-column w-5"></i>
+        <span>Báo cáo & Thống kê</span>
+    </a>
+</nav>
+        <div class="p-4 border-t border-slate-700">
+            <div class="flex items-center gap-3 p-3 bg-slate-800 rounded-2xl">
+                <div class="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">NV</div>
+                <div class="flex-1">
+                    <p class="font-medium">Nguyễn Văn A</p>
+                    <p class="text-xs text-slate-400">Lễ tân trưởng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+         <!-- Main Content -->
+    <div class="flex-1 overflow-auto flex flex-col">
+        <header class="bg-white border-b px-8 py-5 flex items-center justify-between sticky top-0 z-10">
+            <h2 class="text-2xl font-semibold text-gray-800">Bảng điều khiển</h2>
+        </header>
+
+        <div class="p-8 max-w-screen-2xl mx-auto w-full">
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="text-3xl font-bold text-gray-800">Sơ đồ tầng • Thời gian thực</h1>
+                </div>
+                
+                <!-- Legend -->
+                <div class="flex flex-wrap gap-8 mb-10 text-sm">
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 bg-emerald-500 rounded"></div>
+                        <span>Phòng Trống – sẵn sàng nhận khách</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 bg-red-500 rounded"></div>
+                        <span>Đang có khách</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 bg-amber-500 rounded"></div>
+                        <span>Đang dọn</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 bg-stone-800 rounded"></div>
+                        <span>Bảo trì</span>
+                    </div>
+                </div>
+
+                <!-- Tầng 5 -->
+                <div class="mb-12">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-3"><span class="text-2xl">🛎️</span> Tầng 5</h2>
+                    <div id="floor-5" class="grid grid-cols-8 gap-4"></div>
+                </div>
+
+                <!-- Tầng 4 -->
+                <div class="mb-12">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-3"><span class="text-2xl">🛎️</span> Tầng 4</h2>
+                    <div id="floor-4" class="grid grid-cols-8 gap-4"></div>
+                </div>
+
+                <!-- Tầng 3 -->
+                <div class="mb-12">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-3"><span class="text-2xl">🛎️</span> Tầng 3</h2>
+                    <div id="floor-3" class="grid grid-cols-8 gap-4"></div>
+                </div>
+
+                <!-- Tầng 2 -->
+                <div>
+                    <h2 class="text-xl font-semibold mb-4 flex items-center gap-3"><span class="text-2xl">🛎️</span> Tầng 2</h2>
+                    <div id="floor-2" class="grid grid-cols-8 gap-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ĐỔI TRẠNG THÁI PHÒNG -->
+    <div id="roomModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl">
+            <h3 class="text-lg font-bold text-gray-800 mb-1" id="modalTitle">Quản lý phòng</h3>
+            <p class="text-xs text-gray-500 mb-5">Chọn trạng thái mới cho phòng:</p>
+            
+            <div class="space-y-3">
+                <button onclick="changeRoomStatus('ready')" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-semibold text-sm transition">🟢 Sẵn sàng nhận khách</button>
+                <button onclick="changeRoomStatus('occupied')" class="w-full py-3 bg-red-500 hover:bg-red-600 text-white rounded-xl font-semibold text-sm transition">🔴 Đang có khách</button>
+                <button onclick="changeRoomStatus('cleaning')" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-semibold text-sm transition">🟡 Đang dọn</button>
+                <button onclick="changeRoomStatus('maintenance')" class="w-full py-3 bg-stone-800 hover:bg-stone-900 text-white rounded-xl font-semibold text-sm transition">⚫ Bảo trì</button>
+            </div>
+
+            <button onclick="closeModal()" class="w-full mt-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl font-medium text-sm transition">Đóng</button>
+        </div>
+    </div>
+
+    <script>
+        let rooms = [
+            { number: "501", floor: 5, status: "ready" },
+            { number: "502", floor: 5, status: "occupied" },
+            { number: "503", floor: 5, status: "cleaning" },
+            { number: "504", floor: 5, status: "ready" },
+            { number: "505", floor: 5, status: "maintenance" },
+
+            { number: "412", floor: 4, status: "occupied" },
+            { number: "413", floor: 4, status: "ready" },
+            { number: "414", floor: 4, status: "maintenance" },
+            { number: "415", floor: 4, status: "ready" },
+            { number: "416", floor: 4, status: "ready" },
+
+            { number: "305", floor: 3, status: "occupied" },
+            { number: "306", floor: 3, status: "ready" },
+            { number: "307", floor: 3, status: "ready" },
+            { number: "308", floor: 3, status: "cleaning" },
+
+            { number: "201", floor: 2, status: "ready" },
+            { number: "202", floor: 2, status: "occupied" },
+            { number: "203", floor: 2, status: "ready" },
+            { number: "204", floor: 2, status: "cleaning" },
+        ];
+
+        let selectedRoomNumber = null;
+
+        function getRoomDetails(status) {
+            switch(status) {
+                case 'ready':
+                    return { class: 'room-ready', text: 'Sẵn sàng' };
+                case 'occupied':
+                    return { class: 'room-occupied', text: 'Đang ở' };
+                case 'cleaning':
+                    return { class: 'room-cleaning', text: 'Đang dọn' };
+                case 'maintenance':
+                    return { class: 'room-maintenance', text: 'Bảo trì' };
+                default:
+                    return { class: 'bg-gray-200 text-gray-700', text: 'Trống' };
+            }
+        }
+
+        function renderFloor(floorNumber) {
+            const container = document.getElementById(`floor-${floorNumber}`);
+            const floorRooms = rooms.filter(r => r.floor === floorNumber);
+            
+            container.innerHTML = '';
+            floorRooms.forEach(room => {
+                const info = getRoomDetails(room.status);
+                const div = document.createElement('div');
+                div.className = `room aspect-square rounded-3xl flex flex-col items-center justify-center text-center cursor-pointer shadow-sm border-2 border-transparent ${info.class}`;
+                
+                div.innerHTML = `
+                    <div class="text-3xl font-mono font-bold">${room.number}</div>
+                    <div class="text-xs mt-1 uppercase tracking-widest opacity-90">${info.text}</div>
+                `;
+                
+                // Bấm vào phòng để mở bảng đổi trạng thái
+                div.onclick = () => openModal(room.number);
+                container.appendChild(div);
+            });
+            
+            // Thêm các ô trống còn thiếu cho đủ 8 cột mỗi hàng
+            for (let i = floorRooms.length; i < 8; i++) {
+                const empty = document.createElement('div');
+                empty.className = "aspect-square rounded-3xl border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-300";
+                empty.innerHTML = `<span class="text-sm">—</span>`;
+                container.appendChild(empty);
+            }
+        }
+
+        function openModal(roomNumber) {
+            selectedRoomNumber = roomNumber;
+            document.getElementById('modalTitle').textContent = `Phòng ${roomNumber}`;
+            const modal = document.getElementById('roomModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('roomModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            selectedRoomNumber = null;
+        }
+
+        function changeRoomStatus(newStatus) {
+            if (selectedRoomNumber !== null) {
+                const room = rooms.find(r => r.number === selectedRoomNumber);
+                if (room) {
+                    room.status = newStatus;
+                }
+                // Vẽ lại tất cả các tầng để cập nhật màu sắc và trạng thái mới
+                [5, 4, 3, 2].forEach(f => renderFloor(f));
+                closeModal();
+            }
+        }
+
+        // Khởi tạo chạy khi tải trang
+        window.onload = () => {
+            renderFloor(5);
+            renderFloor(4);
+            renderFloor(3);
+            renderFloor(2);
+        };
+    </script>
+</body>
+</html>
